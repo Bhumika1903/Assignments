@@ -1,66 +1,63 @@
-/*Given a string, determine if it is a palindrome, considering only alphanumeric characters.
-Palindrome
-A palindrome is a word, number, phrase, or other sequences of characters which read the same backwards and forwards.
+import java.util.Scanner;
 
-Example:
-If the input string happens to be, "malayalam" then as we see that this word can be read the same as forward and backwards, it is said to be a valid palindrome.
+/*Check whether a given String S is a palindrome using recursion. Return true or false.
 
-The expected output for this example will print, 'true'.
-From that being said, you are required to return a boolean value from the function that has been asked to implement.
-		
-Input Format:
-The first and only line of input contains a string without any leading and trailing spaces. All the characters in the string would be in lower case.
+Input Format :
+String S
 
-Output Format:
-The only line of output prints either 'true' or 'false'.
+Output Format :	
+'true' or 'false'
 
-Note:
-You are not required to print anything. It has already been taken care of.
-
-Constraints:
-0 <= N <= 10^6
-Where N is the length of the input string.
-
-Time Limit: 1 second
+Constraints :
+0 <= |S| <= 1000
+where |S| represents length of string S.
 
 Sample Input 1 :
-abcdcba
+racecar
 
-Sample Output 1 :
-true 
+Sample Output 1:
+true
 
-Sample Input 2:
-coding
+Sample Input 2 :
+ninja
 
 Sample Output 2:
-false
-*/
+false*/
+
 public class Check_Palindrome {
 	
-	public static boolean isPalindrome(String str) {
-        boolean count = false;
-     if(str.length()==1)
-         return true;
-     else{
+	public static boolean isStringPalindrome(String input) {
+		int n = input.length();
+ 
     
-     for (int i = 0;i<str.length();i++){
-         for (int j = str.length() - 1-i;j>i;j--){          
-             if (str.charAt(i) == str.charAt(j)){           
-                 count = true;
-                 break;
-             }else{             
-                 count = false;
-                 break;
-             }
-         }         
-	   }
-     }
-     return count;
-  }
+        if (n == 0)
+            return true;
+ 
+        return isPalRec(input, 0, n - 1);
+
+	}
+    static boolean isPalRec(String str,
+                            int s, int e)
+    {
+        
+        if (s == e){
+            return true;
+        }
+        
+        if ((str.charAt(s)) != (str.charAt(e))){
+            return false;
+        }
+        
+        if (s < e + 1){
+            return isPalRec(str, s + 1, e - 1);
+        }
+        return true;
+    }
 
 	public static void main(String[] args) {
-		String str = "Coding";
-		System.out.println(isPalindrome(str));
+		Scanner s = new Scanner(System.in);
+		String input = s.nextLine();
+		System.out.println(isStringPalindrome(input));
 
 	}
 
